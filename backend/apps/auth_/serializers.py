@@ -5,7 +5,6 @@ from django.core.validators import RegexValidator
 from apps.user_profile.serializers import ProfileCreateSerializer
 from enums.regex_enum import RegEx as R
 from .utils import Utils
-from .tasks import send_email_task
 
 UserModel = get_user_model()
 
@@ -29,7 +28,7 @@ class RegisterSerializer(ModelSerializer):
             'body': f'http://localhost:4200/activate?token={token}',
             'to': [user.email]
         }
-        send_email_task.delay(**data)
+        Utils.send_mail(**data)
         serializer = ProfileCreateSerializer(data=profile)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=user)

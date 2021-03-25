@@ -3,7 +3,7 @@ MAINTAINER Some Dev
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add --no-cache --virtual ..build-deps gcc bash musl-dev mariadb-dev\
+RUN apk add --no-cache --virtual ..build-deps gcc musl-dev mariadb-dev\
     freetype-dev \
     fribidi-dev \
     harfbuzz-dev \
